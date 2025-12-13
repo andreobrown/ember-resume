@@ -23,7 +23,10 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "vite",
-    "test": "vite build --mode development && ember test --path dist"
+    "test": "vite build --mode development && ember test --path dist",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "netlify dev:exec drizzle-kit migrate",
+    "db:studio": "netlify dev:exec drizzle-kit studio"
   },
   "exports": {
     "./tests/*": "./tests/*",
@@ -53,6 +56,7 @@
     "babel-plugin-ember-template-compilation": "^2.4.1",
     "concurrently": "^9.2.1",
     "decorator-transforms": "^2.3.0",
+    "drizzle-kit": "^0.31.8",
     "ember-auto-import": "^2.12.0",
     "ember-cli": "~6.8.0",
     "ember-cli-babel": "^8.2.0",
@@ -90,6 +94,8 @@
     "edition": "octane"
   },
   "dependencies": {
-    "@netlify/blobs": "^10.4.3"
+    "@netlify/blobs": "^10.4.3",
+    "@netlify/neon": "^0.1.0",
+    "drizzle-orm": "^0.45.1"
   }
 }
