@@ -18,5 +18,9 @@ Router.map(function () {
       this.route('edit', { path: ':project_id/edit' });
 
     });
+    this.route('education', function() {
+      this.route('new');
+      this.route('edit', { path: ':education_id/edit' });
+    });
   });
 });

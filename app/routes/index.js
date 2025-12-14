@@ -8,10 +8,12 @@ export default class IndexRoute extends Route {
   async model() {
     const candidates = await this.store.findAll('candidate');
     const projects = await this.store.findAll('project');
+    const education = await this.store.findAll('education');
 
     return hash({
       candidate: candidates.at(0) || null,
-      projects: projects
+      projects: projects,
+      education: education
     });
   }
 }
