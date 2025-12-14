@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
-import { workExperiences } from '../../db/schema.js';
-import { formatCollection, formatSingle, formatError, camelizeKeys } from './lib/jsonapi.js';
+import { workExperiences, jobTitles, responsibilities, achievements } from '../../db/schema.js';
+import { formatCollection, formatSingle, formatResource, formatError, camelizeKeys } from './lib/jsonapi.js';
 
 /**
  * Netlify Function for /work-experiences endpoint
@@ -27,12 +27,15 @@ export default async (req, context) => {
       );
     }
 
-    // ===== GET /work-experiences/:id - Show one work experience =====
+    // ===== GET /work-experiences/:id - Show one work experience with relationships =====
     if (req.method === 'GET' && isIdRequest) {
+      const workExpId = parseInt(id);
+
+      // Get the work experience
       const result = await db
         .select()
         .from(workExperiences)
-        .where(eq(workExperiences.id, parseInt(id)));
+        .where(eq(workExperiences.id, workExpId));
 
       if (result.length === 0) {
         return new Response(
@@ -44,8 +47,50 @@ export default async (req, context) => {
         );
       }
 
+      // Get related job titles
+      const relatedJobTitles = await db
+        .select()
+        .from(jobTitles)
+        .where(eq(jobTitles.workExperienceId, workExpId));
+
+      // Get related responsibilities
+      const relatedResponsibilities = await db
+        .select()
+        .from(responsibilities)
+        .where(eq(responsibilities.workExperienceId, workExpId));
+
+      // Get related achievements
+      const relatedAchievements = await db
+        .select()
+        .from(achievements)
+        .where(eq(achievements.workExperienceId, workExpId));
+
+      // Build relationships object (type/id pairs for EmberData)
+      const relationshipsData = {
+        'job-titles': {
+          data: relatedJobTitles.map(jt => ({ type: 'job-titles', id: String(jt.id) }))
+        },
+        'responsibilities': {
+          data: relatedResponsibilities.map(r => ({ type: 'responsibilities', id: String(r.id) }))
+        },
+        'achievements': {
+          data: relatedAchievements.map(a => ({ type: 'achievements', id: String(a.id) }))
+        }
+      };
+
+      // Build included array (full records sideloaded)
+      const included = [
+        ...relatedJobTitles.map(jt => formatResource('job-titles', jt)),
+        ...relatedResponsibilities.map(r => formatResource('responsibilities', r)),
+        ...relatedAchievements.map(a => formatResource('achievements', a))
+      ];
+
+      // Return compound document
       return new Response(
-        JSON.stringify(formatSingle('work-experiences', result[0])),
+        JSON.stringify({
+          data: formatResource('work-experiences', result[0], relationshipsData),
+          included: included.length > 0 ? included : undefined
+        }),
         {
           status: 200,
           headers: { 'Content-Type': 'application/vnd.api+json' }

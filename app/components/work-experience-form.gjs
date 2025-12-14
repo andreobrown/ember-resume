@@ -4,6 +4,8 @@ import { service } from '@ember/service';
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
 import JobTitleList from './job-title-list';
+import ResponsibilityList from './responsibility-list';
+import AchievementList from './achievement-list';
 
 export default class WorkExperienceFormComponent extends Component {
   @service router;
@@ -72,6 +74,10 @@ export default class WorkExperienceFormComponent extends Component {
       {{#unless @model.isNew}}
         <hr />
         <JobTitleList @model={{@model.jobTitles}} @workExperience={{@model}} />
+        <hr />
+        <ResponsibilityList @model={{@model.responsibilities}} @workExperience={{@model}} />
+        <hr />
+        <AchievementList @model={{@model.achievements}} @workExperience={{@model}} />
       {{/unless}}
     </div>
   </template>
