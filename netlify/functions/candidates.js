@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { candidates } from '../../db/schema.js';
-import { formatCollection, formatSingle, formatError } from './lib/jsonapi.js';
+import { formatCollection, formatSingle, formatError, camelizeKeys } from './lib/jsonapi.js';
 
 /**
  * Netlify Function for /candidates endpoint
@@ -56,7 +56,7 @@ export default async (req, context) => {
     // ===== POST /candidates - Create new candidate =====
     if (req.method === 'POST') {
       const body = await req.json();
-      const attrs = body.data.attributes;
+      const attrs = camelizeKeys(body.data.attributes);
 
       const result = await db
         .insert(candidates)
@@ -85,7 +85,7 @@ export default async (req, context) => {
     // ===== PUT/PATCH /candidates/:id - Update candidate =====
 if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
       const body = await req.json();
-      const attrs = body.data.attributes;
+      const attrs = camelizeKeys(body.data.attributes);
 
       const result = await db
         .update(candidates)
