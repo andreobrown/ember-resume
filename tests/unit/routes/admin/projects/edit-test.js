@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { setupTest } from 'ember-quickstart/tests/helpers';
+import { setupTest } from 'ember-resume/tests/helpers';
 
 module('Unit | Route | admin/projects/edit', function (hooks) {
   setupTest(hooks);

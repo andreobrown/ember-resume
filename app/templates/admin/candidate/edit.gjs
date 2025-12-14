@@ -1,4 +1,4 @@
-import CandidateForm from 'ember-quickstart/components/candidate-form';
+import CandidateForm from 'ember-resume/components/candidate-form';
 
 <template>
   <CandidateForm @model={{@model}} />

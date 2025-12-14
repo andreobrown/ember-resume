@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-quickstart/tests/helpers';
+import { setupRenderingTest } from 'ember-resume/tests/helpers';
 import { render } from '@ember/test-helpers';
-import CandidateForm from 'ember-quickstart/components/candidate-form';
+import CandidateForm from 'ember-resume/components/candidate-form';
 
 module('Integration | Component | candidate-form', function (hooks) {
   setupRenderingTest(hooks);

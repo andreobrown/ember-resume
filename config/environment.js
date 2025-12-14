@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   const ENV = {
-    modulePrefix: 'ember-quickstart',
+    modulePrefix: 'ember-resume',
     environment,
     rootURL: '/',
     locationType: 'history',
