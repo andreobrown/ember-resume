@@ -1,5 +1,5 @@
 import EmberRouter from '@embroider/router';
-import config from 'ember-quickstart/config/environment';
+import config from 'ember-resume/config/environment';
 
 export default class Router extends EmberRouter {
   location = config.locationType;
@@ -7,8 +7,6 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('scientists');
-  this.route('programmers');
   this.route('admin', function() {
     this.route('candidate', function() {
       this.route('edit');
