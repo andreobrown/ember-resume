@@ -24,5 +24,27 @@ Router.map(function () {
       this.route('new');
       this.route('edit', { path: ':certification_id/edit' });
     });
+    this.route('work-experiences', function() {
+      this.route('new');
+      this.route('edit', { path: ':work_experience_id/edit' });
+
+      // Nested routes for job titles
+      this.route('job-titles', { path: ':work_experience_id/job-titles' }, function() {
+        this.route('new');
+        this.route('edit', { path: ':job_title_id/edit' });
+      });
+
+      // Nested routes for responsibilities
+      this.route('responsibilities', { path: ':work_experience_id/responsibilities' }, function() {
+        this.route('new');
+        this.route('edit', { path: ':responsibility_id/edit' });
+      });
+
+      // Nested routes for achievements
+      this.route('achievements', { path: ':work_experience_id/achievements' }, function() {
+        this.route('new');
+        this.route('edit', { path: ':achievement_id/edit' });
+      });
+    });
   });
 });
