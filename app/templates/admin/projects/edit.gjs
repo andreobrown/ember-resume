@@ -1,4 +1,4 @@
-import ProjectForm from 'ember-quickstart/components/project-form';
+import ProjectForm from 'ember-resume/components/project-form';
 
 <template>
   <ProjectForm @model={{@model}} />
