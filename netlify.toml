@@ -1,0 +1,82 @@
+# Netlify Configuration
+# Maps clean Ember URLs to Netlify Functions
+
+[[redirects]]
+  from = "/candidates"
+  to = "/.netlify/functions/candidates"
+  status = 200
+
+[[redirects]]
+  from = "/candidates/*"
+  to = "/.netlify/functions/candidates/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/work-experiences"
+  to = "/.netlify/functions/work-experiences"
+  status = 200
+
+[[redirects]]
+  from = "/work-experiences/*"
+  to = "/.netlify/functions/work-experiences/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/job-titles"
+  to = "/.netlify/functions/job-titles"
+  status = 200
+
+[[redirects]]
+  from = "/job-titles/*"
+  to = "/.netlify/functions/job-titles/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/responsibilities"
+  to = "/.netlify/functions/responsibilities"
+  status = 200
+
+[[redirects]]
+  from = "/responsibilities/*"
+  to = "/.netlify/functions/responsibilities/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/achievements"
+  to = "/.netlify/functions/achievements"
+  status = 200
+
+[[redirects]]
+  from = "/achievements/*"
+  to = "/.netlify/functions/achievements/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/projects"
+  to = "/.netlify/functions/projects"
+  status = 200
+
+[[redirects]]
+  from = "/projects/*"
+  to = "/.netlify/functions/projects/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/education"
+  to = "/.netlify/functions/education"
+  status = 200
+
+[[redirects]]
+  from = "/education/*"
+  to = "/.netlify/functions/education/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/certifications"
+  to = "/.netlify/functions/certifications"
+  status = 200
+
+[[redirects]]
+  from = "/certifications/*"
+  to = "/.netlify/functions/certifications/:splat"
+  status = 200
