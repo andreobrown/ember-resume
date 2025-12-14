@@ -62,13 +62,13 @@
   status = 200
 
 [[redirects]]
-  from = "/education"
-  to = "/.netlify/functions/education"
+  from = "/educations"
+  to = "/.netlify/functions/educations"
   status = 200
 
 [[redirects]]
-  from = "/education/*"
-  to = "/.netlify/functions/education/:splat"
+  from = "/educations/*"
+  to = "/.netlify/functions/educations/:splat"
   status = 200
 
 [[redirects]]

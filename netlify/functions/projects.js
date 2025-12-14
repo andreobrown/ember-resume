@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { projects } from '../../db/schema.js';
-import { formatCollection, formatSingle, formatError } from './lib/jsonapi.js';
+import { formatCollection, formatSingle, formatError, camelizeKeys } from './lib/jsonapi.js';
 
 /**
  * Netlify Function for /projects endpoint
@@ -56,7 +56,7 @@ export default async (req, context) => {
     // ===== POST /projects - Create new project =====
     if (req.method === 'POST') {
       const body = await req.json();
-      const attrs = body.data.attributes;
+      const attrs = camelizeKeys(body.data.attributes);
 
       const result = await db
         .insert(projects)
@@ -80,7 +80,7 @@ export default async (req, context) => {
     // ===== PUT/PATCH /projects/:id - Update project =====
     if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
       const body = await req.json();
-      const attrs = body.data.attributes;
+      const attrs = camelizeKeys(body.data.attributes);
 
       const result = await db
         .update(projects)
