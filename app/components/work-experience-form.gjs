@@ -3,6 +3,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
+import JobTitleList from './job-title-list';
 
 export default class WorkExperienceFormComponent extends Component {
   @service router;
@@ -68,9 +69,10 @@ export default class WorkExperienceFormComponent extends Component {
         </div>
       </form>
 
-      <p class="help-text">
-        Note: You'll be able to add job titles, responsibilities, and achievements after saving.
-      </p>
+      {{#unless @model.isNew}}
+        <hr />
+        <JobTitleList @model={{@model.jobTitles}} @workExperience={{@model}} />
+      {{/unless}}
     </div>
   </template>
 }
