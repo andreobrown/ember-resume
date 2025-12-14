@@ -20,5 +20,9 @@ Router.map(function () {
       this.route('new');
       this.route('edit', { path: ':education_id/edit' });
     });
+    this.route('certifications', function() {
+      this.route('new');
+      this.route('edit', { path: ':certification_id/edit' });
+    });
   });
 });

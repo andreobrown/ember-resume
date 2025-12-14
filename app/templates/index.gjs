@@ -117,6 +117,23 @@
         </section>
       {{/if}}
 
+      {{#if @model.certifications.length}}
+        <section class="certifications">
+          <h2>Certifications <sup><a href="/admin/certifications">Edit</a></sup></h2>
+          {{#each @model.certifications as |cert|}}
+            <div class="certification-item">
+              <h3>{{cert.name}}</h3>
+              {{#if cert.issuer}}
+                <p class="issuer">{{cert.issuer}}</p>
+              {{/if}}
+              {{#if cert.dateEarned}}
+                <p class="date-earned">Earned: {{cert.dateEarned}}</p>
+              {{/if}}
+            </div>
+          {{/each}}
+        </section>
+      {{/if}}
+
     <footer>
       <p>Resume built with Ember.js</p>
     </footer>
