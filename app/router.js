@@ -24,5 +24,9 @@ Router.map(function () {
       this.route('new');
       this.route('edit', { path: ':certification_id/edit' });
     });
+    this.route('work-experiences', function() {
+      this.route('new');
+      this.route('edit', { path: ':work_experience_id/edit' });
+    });
   });
 });
