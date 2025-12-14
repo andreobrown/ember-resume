@@ -5,7 +5,7 @@
  * Convert camelCase to dash-case (JSON:API standard)
  */
 function dasherize(str) {
-  return str.replace(/[A-Z]/g, (char, index) => 
+  return str.replace(/[A-Z]/g, (char, index) =>
     (index > 0 ? '-' : '') + char.toLowerCase()
   );
 }
@@ -15,7 +15,7 @@ function dasherize(str) {
  */
 function dasherizeKeys(obj) {
   if (!obj || typeof obj !== 'object') return obj;
-  
+
   const dasherized = {};
   for (const [key, value] of Object.entries(obj)) {
     dasherized[dasherize(key)] = value;
@@ -35,7 +35,7 @@ function camelize(str) {
  */
 export function camelizeKeys(obj) {
   if (!obj || typeof obj !== 'object') return obj;
-  
+
   const camelized = {};
   for (const [key, value] of Object.entries(obj)) {
     camelized[camelize(key)] = value;
