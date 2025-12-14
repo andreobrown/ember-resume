@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-quickstart/tests/helpers';
+import { setupRenderingTest } from 'ember-resume/tests/helpers';
 import { render } from '@ember/test-helpers';
-import ProjectForm from 'ember-quickstart/components/project-form';
+import ProjectForm from 'ember-resume/components/project-form';
 
 module('Integration | Component | project-form', function (hooks) {
   setupRenderingTest(hooks);

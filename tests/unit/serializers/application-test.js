@@ -1,4 +1,4 @@
-import { setupTest } from 'ember-quickstart/tests/helpers';
+import { setupTest } from 'ember-resume/tests/helpers';
 import { module, test } from 'qunit';
 
 module('Unit | Serializer | application', function (hooks) {

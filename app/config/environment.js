@@ -1,7 +1,7 @@
 import loadConfigFromMeta from '@embroider/config-meta-loader';
 import { assert } from '@ember/debug';
 
-const config = loadConfigFromMeta('ember-quickstart');
+const config = loadConfigFromMeta('ember-resume');
 
 assert(
   'config is not an object',

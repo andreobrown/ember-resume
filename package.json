@@ -1,8 +1,8 @@
 {
-  "name": "ember-quickstart",
+  "name": "ember-resume",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for ember-quickstart goes here",
+  "description": "A modern resume/CV application built with Ember.js and Netlify",
   "repository": "",
   "license": "MIT",
   "author": "",

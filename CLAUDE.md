@@ -64,7 +64,7 @@ npm exec ember help generate  # See all available blueprints
 - `app/routes/` - Route handlers (.js files)
 - `app/templates/` - Route templates (.gjs files using template-only components)
 - `app/components/` - Reusable components (.gjs files)
-- `config/environment.js` - Environment configuration (modulePrefix: 'ember-quickstart')
+- `config/environment.js` - Environment configuration (modulePrefix: 'ember-resume')
 
 **Component Format:**
 - Uses `.gjs` (Glimmer JavaScript) files with embedded `<template>` tags
@@ -73,7 +73,7 @@ npm exec ember help generate  # See all available blueprints
 - Template syntax uses `{{outlet}}` for route rendering and `{{#each}}` for iteration
 
 **Key Configuration:**
-- Module prefix: `ember-quickstart` (defined in config/environment.js)
+- Module prefix: `ember-resume` (defined in config/environment.js)
 - Ember Data configured with `DEPRECATE_STORE_EXTENDS_EMBER_OBJECT: false`
 - Location type: `history` API for routing
 - Test environment uses `locationType: 'none'` and auto-boots disabled
@@ -86,7 +86,7 @@ npm exec ember help generate  # See all available blueprints
 
 ## Important Notes
 
-- The project name in package.json is `ember-quickstart` but the repo is `ember-resume` - this is the module prefix used throughout imports
+- The project name in package.json is `ember-resume` but the repo is `ember-resume` - this is the module prefix used throughout imports
 - Template-only route templates are defined as `.gjs` files in `app/templates/`
 - Components in `.gjs` format export a class with an embedded `<template>` section
-- When importing from the app namespace, use `ember-quickstart/...` as the module prefix
+- When importing from the app namespace, use `ember-resume/...` as the module prefix

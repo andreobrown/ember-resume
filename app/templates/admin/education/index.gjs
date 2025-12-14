@@ -1,4 +1,4 @@
-import EducationList from 'ember-quickstart/components/education-list';
+import EducationList from 'ember-resume/components/education-list';
 
 <template>
   <EducationList @model={{@model}} />
