@@ -27,6 +27,12 @@ Router.map(function () {
     this.route('work-experiences', function() {
       this.route('new');
       this.route('edit', { path: ':work_experience_id/edit' });
+
+      // Nested routes for job titles
+      this.route('job-titles', { path: ':work_experience_id/job-titles' }, function() {
+        this.route('new');
+        this.route('edit', { path: ':job_title_id/edit' });
+      });
     });
   });
 });
