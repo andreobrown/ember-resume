@@ -100,6 +100,23 @@
         </section>
       {{/if}}
 
+      {{#if @model.education.length}}
+        <section class="education">
+          <h2>Education <sup><a href="/admin/education">Edit</a></sup></h2>
+          {{#each @model.education as |edu|}}
+            <div class="education-item">
+              <h3>{{edu.degree}}{{#if edu.fieldOfStudy}} in {{edu.fieldOfStudy}}{{/if}}</h3>
+              {{#if edu.institution}}
+                <p class="institution">{{edu.institution}}</p>
+              {{/if}}
+              {{#if edu.graduationYear}}
+                <p class="graduation-year">Graduated: {{edu.graduationYear}}</p>
+              {{/if}}
+            </div>
+          {{/each}}
+        </section>
+      {{/if}}
+
     <footer>
       <p>Resume built with Ember.js</p>
     </footer>
