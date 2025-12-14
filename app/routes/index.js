@@ -9,11 +9,13 @@ export default class IndexRoute extends Route {
     const candidates = await this.store.findAll('candidate');
     const projects = await this.store.findAll('project');
     const education = await this.store.findAll('education');
+    const certifications = await this.store.findAll('certification');
 
     return hash({
       candidate: candidates.at(0) || null,
       projects: projects,
-      education: education
+      education: education,
+      certifications: certifications
     });
   }
 }
