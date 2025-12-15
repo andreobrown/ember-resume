@@ -13,10 +13,10 @@ export default class CertificationFormComponent extends Component {
   }
 
   @action
-  updateDate(event) {
+  updateYear(event) {
     const value = event.target.value;
-    // Convert string to Date object, or null if empty
-    this.args.model.dateEarned = value ? new Date(value) : null;
+    // Convert year to Date object (Jan 1 of that year), or null if empty
+    this.args.model.dateEarned = value ? new Date(parseInt(value), 0, 1) : null;
   }
 
   @action
@@ -43,16 +43,16 @@ export default class CertificationFormComponent extends Component {
     this.router.transitionTo('admin.certifications.index');
   }
 
-  // Format date for input field (YYYY-MM-DD)
-  get dateValue() {
+  // Get year for input field
+  get yearValue() {
     if (!this.args.model.dateEarned) return '';
     const date = new Date(this.args.model.dateEarned);
-    return date.toISOString().split('T')[0];
+    return date.getFullYear().toString();
   }
 
   <template>
     <div class="certification-form">
-      <h1>{{if @model.isNew "Add Certification" "Edit Certification"}}</h1>
+      <h1>{{if @model.isNew "Add Certification/Course" "Edit Certification/Course"}}</h1>
 
       <form {{on "submit" this.save}}>
         <label>
@@ -77,16 +77,19 @@ export default class CertificationFormComponent extends Component {
         </label>
 
         <label>
-          Date Earned
+          Year Earned
           <input
-            type="date"
-            value={{this.dateValue}}
-            {{on "input" this.updateDate}}
+            type="number"
+            value={{this.yearValue}}
+            {{on "input" this.updateYear}}
+            placeholder="2024"
+            min="1900"
+            max="2100"
           />
         </label>
 
         <div class="form-actions">
-          <button type="submit">Save Certification</button>
+          <button type="submit">Save</button>
           <button type="button" {{on "click" this.cancel}}>Cancel</button>
         </div>
       </form>

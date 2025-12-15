@@ -4,6 +4,12 @@ import { service } from '@ember/service';
 class ResumeDisplay extends Component {
   @service session;
 
+  formatYear(date) {
+    if (!date) return '';
+    const d = new Date(date);
+    return d.getFullYear().toString();
+  }
+
   <template>
     <div class="resume">
       {{#if @model.candidate}}
@@ -204,7 +210,7 @@ class ResumeDisplay extends Component {
         {{#if @model.certifications.length}}
           <section class="certifications">
             <h2>
-              Certifications
+              Certifications & Courses
               {{#if this.session.isAuthenticated}}
                 <sup><a href="/admin/certifications">Edit</a></sup>
               {{/if}}
@@ -216,7 +222,7 @@ class ResumeDisplay extends Component {
                   <p class="issuer">{{cert.issuer}}</p>
                 {{/if}}
                 {{#if cert.dateEarned}}
-                  <p class="date-earned">Earned: {{cert.dateEarned}}</p>
+                  <p class="date-earned">{{this.formatYear cert.dateEarned}}</p>
                 {{/if}}
               </div>
             {{/each}}
