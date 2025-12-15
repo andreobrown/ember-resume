@@ -224,7 +224,7 @@ class ResumeDisplay extends Component {
         {{/if}}
 
         <footer>
-          <p>Resume built with Ember.js</p>
+          <p>Resume built with Ember.js · <a href="https://github.com/andreobrown/ember-resume" target="_blank" rel="noopener noreferrer">View Source</a></p>
         </footer>
 
       {{else}}
