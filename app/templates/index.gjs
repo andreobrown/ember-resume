@@ -76,6 +76,67 @@
         </section>
       {{/if}}
 
+      {{#if @model.workExperiences.length}}
+        <section class="work-experiences">
+          <h2>Work Experience <sup><a href="/admin/work-experiences">Edit</a></sup></h2>
+          {{#each @model.workExperiences as |workExp|}}
+            <div class="work-experience-item">
+              <div class="work-experience-header">
+                <h3>{{workExp.company}}</h3>
+                {{#if workExp.location}}
+                  <span class="location">{{workExp.location}}</span>
+                {{/if}}
+              </div>
+
+              {{#if workExp.jobTitles.length}}
+                <div class="job-titles">
+                  {{#each workExp.jobTitles as |jobTitle|}}
+                    <div class="job-title-item">
+                      <strong>{{jobTitle.title}}</strong>
+                      {{#if jobTitle.isLeadership}}
+                        <span class="leadership-badge">Leadership</span>
+                      {{/if}}
+                      <span class="dates">
+                        {{#if jobTitle.startDate}}
+                          {{jobTitle.startDate}}
+                        {{/if}}
+                        {{#if jobTitle.endDate}}
+                          - {{jobTitle.endDate}}
+                        {{else}}
+                          - Present
+                        {{/if}}
+                      </span>
+                    </div>
+                  {{/each}}
+                </div>
+              {{/if}}
+
+              {{#if workExp.responsibilities.length}}
+                <div class="responsibilities">
+                  <h4>Responsibilities</h4>
+                  <ul>
+                    {{#each workExp.responsibilities as |resp|}}
+                      <li>{{resp.content}}</li>
+                    {{/each}}
+                  </ul>
+                </div>
+              {{/if}}
+
+              {{#if workExp.achievements.length}}
+                <div class="achievements">
+                  <h4>Key Achievements</h4>
+                  <ul>
+                    {{#each workExp.achievements as |achievement|}}
+                      <li>{{achievement.content}}</li>
+                    {{/each}}
+                  </ul>
+                </div>
+              {{/if}}
+            </div>
+          {{/each}}
+        </section>
+      {{/if}}
+
       {{#if @model.projects.length}}
         <section class="projects">
           <h2>Projects <sup><a href="/admin/projects">Edit</a></sup></h2>
