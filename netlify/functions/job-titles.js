@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { jobTitles } from '../../db/schema.js';
 import { formatCollection, formatSingle, formatError, camelizeKeys } from './lib/jsonapi.js';
+import { requireAuth, unauthorizedResponse } from './lib/auth.js';
 
 /**
  * Netlify Function for /job-titles endpoint
@@ -55,6 +56,9 @@ export default async (req, context) => {
 
     // ===== POST /job-titles - Create new job title =====
     if (req.method === 'POST') {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -83,6 +87,9 @@ export default async (req, context) => {
 
     // ===== PUT/PATCH /job-titles/:id - Update job title =====
     if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -123,6 +130,9 @@ export default async (req, context) => {
 
     // ===== DELETE /job-titles/:id - Delete job title =====
     if (req.method === 'DELETE' && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const result = await db
         .delete(jobTitles)
         .where(eq(jobTitles.id, parseInt(id)))
