@@ -18,23 +18,19 @@ export default class CertificationListComponent extends Component {
     }
   }
 
-  // Format date for display
-  formatDate(date) {
+  // Format date to show year only
+  formatYear(date) {
     if (!date) return '';
     const d = new Date(date);
-    return d.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
+    return d.getFullYear().toString();
   }
 
   <template>
     <div class="admin-certifications-list">
-      <h1>Manage Certifications</h1>
+      <h1>Manage Certifications & Courses</h1>
 
       <div class="actions">
-        <LinkTo @route="admin.certifications.new" class="btn-primary">+ Add Certification</LinkTo>
+        <LinkTo @route="admin.certifications.new" class="btn-primary">+ Add Certification/Course</LinkTo>
         <LinkTo @route="index">← Back to Resume</LinkTo>
       </div>
 
@@ -44,7 +40,7 @@ export default class CertificationListComponent extends Component {
             <tr>
               <th>Certification</th>
               <th>Issuer</th>
-              <th>Date Earned</th>
+              <th>Year</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -53,7 +49,7 @@ export default class CertificationListComponent extends Component {
               <tr>
                 <td>{{cert.name}}</td>
                 <td>{{cert.issuer}}</td>
-                <td>{{this.formatDate cert.dateEarned}}</td>
+                <td>{{this.formatYear cert.dateEarned}}</td>
                 <td>
                   <LinkTo @route="admin.certifications.edit" @model={{cert}}>Edit</LinkTo>
                   |
@@ -64,7 +60,7 @@ export default class CertificationListComponent extends Component {
           </tbody>
         </table>
       {{else}}
-        <p class="empty-state">No certifications yet. Click "Add Certification" to create one.</p>
+        <p class="empty-state">No certifications or courses yet. Click "Add Certification/Course" to create one.</p>
       {{/if}}
     </div>
   </template>
