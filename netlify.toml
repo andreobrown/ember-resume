@@ -2,6 +2,11 @@
 # Maps clean Ember URLs to Netlify Functions
 
 [[redirects]]
+  from = "/auth"
+  to = "/.netlify/functions/auth"
+  status = 200
+
+[[redirects]]
   from = "/candidates"
   to = "/.netlify/functions/candidates"
   status = 200

@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { workExperiences, jobTitles, responsibilities, achievements } from '../../db/schema.js';
 import { formatCollection, formatSingle, formatResource, formatError, camelizeKeys } from './lib/jsonapi.js';
+import { requireAuth, unauthorizedResponse } from './lib/auth.js';
 
 /**
  * Netlify Function for /work-experiences endpoint
@@ -100,6 +101,9 @@ export default async (req, context) => {
 
     // ===== POST /work-experiences - Create new work experience =====
     if (req.method === 'POST') {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -122,6 +126,9 @@ export default async (req, context) => {
 
     // ===== PUT/PATCH /work-experiences/:id - Update work experience =====
     if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -156,6 +163,9 @@ export default async (req, context) => {
 
     // ===== DELETE /work-experiences/:id - Delete work experience =====
     if (req.method === 'DELETE' && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const result = await db
         .delete(workExperiences)
         .where(eq(workExperiences.id, parseInt(id)))
