@@ -10,12 +10,20 @@ export default class IndexRoute extends Route {
     const projects = await this.store.findAll('project');
     const education = await this.store.findAll('education');
     const certifications = await this.store.findAll('certification');
+    const workExperiences = await this.store.findAll('work-experience');
+
+    // Load all related records for work experiences
+    // (they'll be sideloaded via compound documents when we fetch each one)
+    for (const workExp of workExperiences.slice()) {
+      await this.store.findRecord('work-experience', workExp.id);
+    }
 
     return hash({
       candidate: candidates.at(0) || null,
       projects: projects,
       education: education,
-      certifications: certifications
+      certifications: certifications,
+      workExperiences: workExperiences
     });
   }
 }
