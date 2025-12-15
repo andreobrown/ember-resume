@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { certifications } from '../../db/schema.js';
 import { formatCollection, formatSingle, formatError, camelizeKeys } from './lib/jsonapi.js';
+import { requireAuth, unauthorizedResponse } from './lib/auth.js';
 
 /**
  * Netlify Function for /certifications endpoint
@@ -55,6 +56,9 @@ export default async (req, context) => {
 
     // ===== POST /certifications - Create new certification =====
     if (req.method === 'POST') {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -78,6 +82,9 @@ export default async (req, context) => {
 
     // ===== PUT/PATCH /certifications/:id - Update certification =====
     if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -113,6 +120,9 @@ export default async (req, context) => {
 
     // ===== DELETE /certifications/:id - Delete certification =====
     if (req.method === 'DELETE' && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const result = await db
         .delete(certifications)
         .where(eq(certifications.id, parseInt(id)))

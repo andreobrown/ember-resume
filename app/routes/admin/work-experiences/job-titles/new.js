@@ -7,7 +7,6 @@ export default class AdminWorkExperiencesJobTitlesNewRoute extends Route {
   async model() {
     // Get the work_experience_id from the parent route's params
     const params = this.paramsFor('admin.work-experiences.job-titles');
-    console.log('Parent params:', params);
 
     // Load the work experience
     const workExperience = await this.store.findRecord('work-experience', params.work_experience_id);
