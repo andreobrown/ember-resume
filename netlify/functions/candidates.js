@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { candidates } from '../../db/schema.js';
 import { formatCollection, formatSingle, formatError, camelizeKeys } from './lib/jsonapi.js';
-
+import { requireAuth, unauthorizedResponse } from './lib/auth.js';
 /**
  * Netlify Function for /candidates endpoint
  * Handles full CRUD operations for candidates
@@ -55,6 +55,10 @@ export default async (req, context) => {
 
     // ===== POST /candidates - Create new candidate =====
     if (req.method === 'POST') {
+      // Check auth for mutating operations
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -84,6 +88,10 @@ export default async (req, context) => {
 
     // ===== PUT/PATCH /candidates/:id - Update candidate =====
 if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
+      // Check auth for mutating operations
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -125,6 +133,10 @@ if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
 
     // ===== DELETE /candidates/:id - Delete candidate =====
     if (req.method === 'DELETE' && isIdRequest) {
+      // Check auth for mutating operations
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const result = await db
         .delete(candidates)
         .where(eq(candidates.id, parseInt(id)))

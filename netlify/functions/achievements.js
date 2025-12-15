@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../../db/index.js';
 import { achievements } from '../../db/schema.js';
 import { formatCollection, formatSingle, formatError, camelizeKeys } from './lib/jsonapi.js';
+import { requireAuth, unauthorizedResponse } from './lib/auth.js';
 
 /**
  * Netlify Function for /achievements endpoint
@@ -55,6 +56,9 @@ export default async (req, context) => {
 
     // ===== POST /achievements - Create new achievement =====
     if (req.method === 'POST') {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -81,6 +85,9 @@ export default async (req, context) => {
 
     // ===== PUT/PATCH /achievements/:id - Update achievement =====
     if ((req.method === 'PUT' || req.method === 'PATCH') && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const body = await req.json();
       const attrs = camelizeKeys(body.data.attributes);
 
@@ -119,6 +126,9 @@ export default async (req, context) => {
 
     // ===== DELETE /achievements/:id - Delete achievement =====
     if (req.method === 'DELETE' && isIdRequest) {
+      if (!requireAuth(req)) {
+        return unauthorizedResponse();
+      }
       const result = await db
         .delete(achievements)
         .where(eq(achievements.id, parseInt(id)))
