@@ -27,3 +27,7 @@
 
 # Local Netlify folder
 .netlify
+
+# Environment variables (NEVER commit these!)
+.env
+.env.*
