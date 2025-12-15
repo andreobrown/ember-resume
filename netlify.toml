@@ -85,3 +85,9 @@
   from = "/certifications/*"
   to = "/.netlify/functions/certifications/:splat"
   status = 200
+
+# SPA catch-all (must be last)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
