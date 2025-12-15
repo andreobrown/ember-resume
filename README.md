@@ -2,6 +2,8 @@
 
 A personal resume/CV web application built to learn modern Ember.js.
 
+**Live Demo:** [andrebrownresume.netlify.app](https://andrebrownresume.netlify.app)
+
 ## Tech Stack
 
 | Layer | Technology |
