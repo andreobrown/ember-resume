@@ -1,53 +1,80 @@
 # Ember Resume
 
-Small project to get familiar with Ember.
+A personal resume/CV web application built to learn modern Ember.js.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Ember.js 6.8 with Vite |
+| **Components** | Glimmer components (.gjs template tag format) |
+| **Data** | EmberData with JSON:API adapter |
+| **Auth** | ember-simple-auth with custom authenticator |
+| **Backend** | Netlify Functions (serverless) |
+| **Database** | Netlify DB (Neon Postgres) via Drizzle ORM |
+| **Styling** | Vanilla CSS with custom properties |
+| **Deployment** | Netlify (auto-deploy from GitHub) |
+
+## Features
+
+- Public resume display with work experience, education, certifications, projects
+- Admin CRUD interface (protected by authentication)
+- Bearer token auth for API endpoints
+- Responsive design + print-friendly styles
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
-
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) (with npm)
-- [Google Chrome](https://google.com/chrome/)
 
 ## Installation
 
-- `git clone <repository-url>` this repository
-- `cd ember-resume`
-- `npm install`
+```bash
+git clone <repository-url>
+cd ember-resume
+npm install
+```
 
-## Running / Development
+## Local Development
 
-- `npm run start`
-- Visit your app at [http://localhost:4200](http://localhost:4200).
-- Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+```bash
+npm run start
+```
 
-### Code Generators
+Visit [http://localhost:4200](http://localhost:4200)
 
-Make use of the many generators for code, try `npm exec ember help generate` for more details
+### Environment Variables
 
-### Running Tests
+Create a `.env` file for local development:
 
-- `npm run test`
+```
+ADMIN_USERNAME=your_username
+ADMIN_PASSWORD=your_password
+AUTH_TOKEN=your_secret_token
+```
 
-### Linting
+### Database
 
-- `npm run lint`
-- `npm run lint:fix`
+```bash
+npm run db:generate  # Generate migrations
+npm run db:push      # Push schema to database
+npm run db:seed      # Seed sample data
+```
 
-### Building
+## Building
 
-- `npm exec vite build --mode development` (development)
-- `npm run build` (production)
+```bash
+npm run build
+```
 
-### Deploying
+## Deployment
 
-Specify what it takes to deploy your app.
+Deployed automatically to Netlify on push to `main`. Environment variables are configured in the Netlify dashboard.
 
-## Further Reading / Useful Links
+## Further Reading
 
-- [ember.js](https://emberjs.com/)
-- [Vite](https://vite.dev)
-- Development Browser Extensions
-  - [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  - [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+- [Ember.js Guides](https://guides.emberjs.com/)
+- [Ember.js API Docs](https://api.emberjs.com/)
+- [ember-simple-auth](https://github.com/mainmatter/ember-simple-auth)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Netlify Functions](https://docs.netlify.com/functions/overview/)
