@@ -10,6 +10,12 @@ class ResumeDisplay extends Component {
     return d.getFullYear().toString();
   }
 
+  formatMonthYear(date) {
+    if (!date) return '';
+    const d = new Date(date);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  }
+
   <template>
     <div class="resume">
       {{#if @model.candidate}}
@@ -117,10 +123,10 @@ class ResumeDisplay extends Component {
                         {{/if}}
                         <span class="dates">
                           {{#if jobTitle.startDate}}
-                            {{jobTitle.startDate}}
+                            {{this.formatMonthYear jobTitle.startDate}}
                           {{/if}}
                           {{#if jobTitle.endDate}}
-                            - {{jobTitle.endDate}}
+                            - {{this.formatMonthYear jobTitle.endDate}}
                           {{else}}
                             - Present
                           {{/if}}
